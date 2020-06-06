@@ -64,8 +64,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-
+        <div class="flex-center position-ref" style="margin-bottom:50px;">
             <div class="content">
                 <div class="title m-b-md">
                     Laravel Example 1
@@ -73,6 +72,41 @@
                 <div>
                     - Neil Nguyen | Adamo - 
                 </div>
+            </div>
+        </div>
+        <hr>
+        <div class="flex-center position-ref">
+            <div class="content" style="width:100%; margin-bottom: 100px;">
+                <h2> List of students </h2>
+                
+                <table border="1" style="width:50%; margin: 0 auto;">
+                    <tr>
+                        <td>Id</td>
+                        <td>Name</td>
+                        <td>Avartar</td>
+                    </tr>
+                    @foreach ($students As $key => $value)
+                        <tr>
+                            <td>{{ $value->id }}</td>
+                            <td>{{ $value->name }}</td>
+                            <td>
+                                @if ($value->avatar) 
+                                    <img src="{{ Storage::url($value->avatar) }}" alt="{{ $value->avatar }}" width="300" heigh="300"/>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+
+                <h2>Create new student</h2>
+                <form action="/createStudent" method="post" enctype='multipart/form-data'>
+                    @csrf
+                    <label>Name</label>
+                    <input type="text" name="name"/>
+                    <label>Avatar</label>
+                    <input type="file" name="avatar"/>
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </body>
